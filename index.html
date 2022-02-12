@@ -2,59 +2,258 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>고양이 가라사대</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>고양이 가라사대-복제</title>
 </head>
 <style>
-  body {
-    text-align: center;
-  }
+    body {
+        text-align: center;
+    }
 
-  .main-card button {
-    position: relative;
-    left: -45px;
-    bottom: 15px;
-  }
+    .main-card button {
+        position: relative;
+        left: -45px;
+        bottom: 15px;
+    }
 
-  .favorites {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 15px;
-  }
+    .favorites {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
 
-  .favorites img {
-    width: 150px;
-  }
+    /* .favorites img {
+        width: 150px;
+    } */
 </style>
 
 <body>
-  <h1>1번째 고양이 가라사대대</h1>
-  <form>
-    <input type="text" name="name" placeholder="영어 대사를 입력해주세요" />
-    <button type="submit">생성</button>
-  </form>
-  <div class="main-card">
-    <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" alt="고양이" width="400" />
-    <button>🤍</button>
-  </div>
-  <ul class="favorites">
-    <li>
-      <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" alt="고양이" />
-    </li>
-    <li>
-      <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" alt="고양이" />
-    </li>
-    <li>
-      <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" alt="고양이" />
-    </li>
-  </ul>
-  <script>
-    console.log("야옹");
-  </script>
+    <div id="app"></div>
+    <!-- <h1>1번째 고양이 가라사대</h1>
+    <form>
+        <input type="text" name="name" placeholder="영어 대사를 입력해주세요" />
+        <button type="submit">생성</button>
+    </form>
+    <div class="main-card">
+        <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" alt="고양이" width="400" />
+        <button>🤍</button>
+    </div>
+    <ul class="favorites">
+        <li>
+            <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" alt="고양이" />
+        </li>
+        <li>
+            <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" alt="고양이" />
+        </li>
+        <li>
+            <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" alt="고양이" />
+        </li>
+    </ul>
+    <script>
+        console.log("야옹");
+    </script> -->
+    <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+
+    <script type="text/babel">
+
+        const jsonLocalStorage = {
+            setItem: (key, value) => {
+                localStorage.setItem(key, JSON.stringify(value));
+            },
+            getItem: (key) => {
+                return JSON.parse(localStorage.getItem(key));
+            },
+        };
+
+        const CAT1 = "https://cataas.com/cat/60b73094e04e18001194a309/says/react";
+        const CAT2 = "https://cataas.com//cat/5e9970351b7a400011744233/says/inflearn";
+        const CAT3 = "https://cataas.com/cat/595f280b557291a9750ebf65/says/JavaScript";
+
+        // const catList = (
+        //     <li>
+        //         <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" />
+        //     </li>
+        // )
+
+        function Catlist(props) {
+            return (
+                <li>
+                    <img src={props.src} style={{ width: "150px", border: "1px solid red" }} />
+                </li>
+            )
+        }
+
+        // const catListAgain = (
+        //     <ul class="favorites">
+        //         <Catlist />
+        //         <Catlist />
+        //         <Catlist />
+        //     </ul>
+        // )
+
+        function CatListAgain({ pic2 }) {
+            // const cats = [CAT2, CAT3];
+            console.log(pic2);
+            return (
+                <ul className="favorites">
+                    {pic2.map(cat => <Catlist src={cat} key={cat} />)}
+                </ul>
+            )
+        }
+
+        // const mainCard = (
+        //     <div class="main-card">
+        //         <img src="https://cataas.com/cat/60b73094e04e18001194a309/says/react" alt="고양이" width="400" />
+        //         <button>🤍</button>
+        //     </div>
+        // )
+
+        function MainCard() {
+            return (
+                <div className="main-card">
+                    <img src={CAT1} alt="고양이11" width="500" />
+                    <button>🤍</button>
+                </div>
+            )
+        }
+
+        const MainCard2 = ({ pic, handleHeartClick }) => {
+            console.log("what");
+            console.log(pic);
+            console.log(handleHeartClick);
+
+            function handleHeartMouse() {
+                console.log('heart strike');
+            }
+            return (
+                <div className="main-card">
+                    <img src={pic} alt="고양이" width="400" />
+                    <button onClick={handleHeartClick} onMouseOver={handleHeartMouse}>🤍</button>
+                </div>
+            )
+        }
+
+        const hTag = (
+            <h1>복제</h1>
+        )
+
+        const HTag2 = (proc) => {
+            console.log('htag:::::', proc.id);
+            return (
+                <div>
+                    <h1>{proc.name}</h1>
+                    <h1>{proc.children}, {proc.id}</h1>
+                </div>
+            )
+        }
+
+        const hTag3 = <h1>위번째 고양이 가라사대</h1>
+
+        const formTag = (
+            <form>
+                <input type="text" name="name" placeholder="영어 대사를 입력해주세요" />
+                <button type="submit">생성</button>
+            </form>
+        )
+
+        const FormTag2 = ({ changePic }) => {
+
+            const includesHangul = (text) => /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/i.test(text);
+
+            const [value, setValue] = React.useState("");
+            const [errMsg, setErrMsg] = React.useState("");
+
+            function handleInputChange(e) {
+                setErrMsg('');
+                const inputValue = e.target.value;
+
+                if (includesHangul(inputValue)) {
+                    console.log(includesHangul(inputValue));
+                    setErrMsg('dont be kor');
+                }
+
+                console.log(inputValue.toUpperCase());
+
+                setValue(inputValue.toUpperCase());
+            }
+
+            function handleFormSubmit(e) {
+                event.preventDefault();
+                setErrMsg('');
+                if (value === '') {
+                    setErrMsg('dont be blank');
+                    return;
+                }
+                changePic();
+            }
+
+            return (
+                <form onSubmit={handleFormSubmit}>
+                    <input type="text" name="name" placeholder="영어 대사를 입력해주세요" onChange={handleInputChange} value={value} />
+                    <button type="submit">생성</button>
+                    <p style={{ color: "red" }}>{errMsg}</p>
+                </form>
+
+            )
+        }
+
+        const App = () => {
+            const [counter, setCounter] = React.useState(
+                jsonLocalStorage.getItem('counter')
+            );
+            console.log('type:', typeof counter);
+
+            const [pic, setPic] = React.useState(CAT1);
+
+            const [picList, setPicList] = React.useState(
+                jsonLocalStorage.getItem('picList') || []
+            );
+
+            console.log("카운터", counter)
+
+            function changePic() {
+                // event.preventDefault();
+                const nextCounter = counter + 1;
+
+                console.log('req fast');
+                console.log('changePic', counter);
+                setCounter(nextCounter);
+                jsonLocalStorage.setItem("counter", nextCounter);
+                setPic(CAT2);
+            }
+
+            function handleHeartClick() {
+                const nextPic = [...picList, pic]
+                console.log('heart beat');
+                setPicList(nextPic);
+                jsonLocalStorage.setItem("picList", nextPic);
+
+            }
+
+            return (
+                <div>
+                    <HTag2 name="이것도?">진짜태크처럼</HTag2>
+                    <HTag2 name="고양이 인자값" id={counter} />
+                    {hTag3}
+                    <FormTag2 changePic={changePic} />
+                    <MainCard2 pic={pic} handleHeartClick={handleHeartClick} />
+                    <CatListAgain pic2={picList} />
+                </div>
+            )
+        }
+
+        const randerIt = document.querySelector("#app");
+
+        ReactDOM.render(<App />, randerIt);
+
+    </script>
 </body>
 
 </html>
